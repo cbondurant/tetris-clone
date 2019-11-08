@@ -1,13 +1,74 @@
 package com.github.cbondurant;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.Color;
 
 class TetrominoBag{
-    private Tetromino [] items = {};
+    // #region Tetromino Definition
+    private Tetromino [] items = {
+        new Tetromino( // L
+            new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(1, -1)},
+            new Point [][] {
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+            }, Color.ORANGE),
+        new Tetromino( // J
+            new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(-1, -1)},
+            new Point [][]    {
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+            }, Color.BLUE),
+        new Tetromino( // S
+            new Point []{ new Point(-1, 0), new Point(0, 0), new Point(0, -1), new Point(1, -1)},
+            new Point [][]{
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+            }, Color.GREEN),
+        new Tetromino( // Z
+            new Point []{ new Point(-1, -1), new Point(0, 0), new Point(1, 0), new Point(0, -1)},
+            new Point [][]{
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+            }, Color.RED),
+        new Tetromino( // O
+            new Point []{ new Point(0, -1), new Point(0, 0), new Point(1, 0), new Point(1, -1)},
+            new Point [][]{
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, -1), new Point( 0, -1), new Point( 0, -1), new Point( 0, -1), new Point( 0, -1)},
+                { new Point(-1, -1), new Point(-1, -1), new Point(-1, -1), new Point(-1, -1), new Point(-1, -1)},
+                { new Point(-1, 0), new Point(-1, 0), new Point(-1, 0), new Point(-1, 0), new Point(-1, 0)} 
+        }, Color.YELLOW),
+        new Tetromino(
+            new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(2, 0)},
+            new Point [][] {
+                { new Point( 0, 0), new Point(-1, 0), new Point( 2, 0), new Point(-1, 0), new Point( 2, 0)},
+                { new Point(-1, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 1), new Point( 0, -2)},
+                { new Point(-1, 1), new Point( 1, 1), new Point(-2, 1), new Point( 1, 0), new Point(-2, 0)},
+                { new Point( 0, 1), new Point( 0, 1), new Point( 0, 1), new Point( 0, -1), new Point( 0, 2)}
+        }, Color.CYAN),
+        new Tetromino(
+            new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, -1)},
+            new Point [][] {
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+       }, Color.MAGENTA)
+    };
+    //#endregion
     private int index;
 
     TetrominoBag(){
         this.index = 0;
+        shuffle();
     }
 
     private void shuffle(){
@@ -31,38 +92,46 @@ class TetrominoBag{
 class Tetromino{
     Point [] tiles;
     Point [][] rot_offsets;
-    Point fulcrum, position;
+    Point position;
+    Color color;
+    private int rotState;
 
-    Tetromino(Point [] tiles, Point [][] offsets, Point fulcrum){
+    Tetromino(Point [] tiles, Point [][] offsets, Color color){
+        this.rotState = 0;
         this.tiles = tiles;
         this.rot_offsets = offsets;
-        this.fulcrum = fulcrum;
-        this.position = Point.Zero();
+        this.position = new Point(5,5);
+        this.color = color;
     }
 
-
-}
-
-class Point{
-    int x, y;
-    Point(int x, int y){
-        this.x = x;
-        this.y = y;
+    public void rotateCW(){
+        // TODO: Add offset checks
+        rotState = rotState + 1 % 4;
+        for (int i = 0; i < tiles.length; ++i){
+            tiles[i] = new Point(-tiles[i].y, tiles[i].x);
+        }
+    }
+    public Point [] cwOffsets(){
+        Point [] offsets = new Point [5];
+        for (int i = 0; i < offsets.length; ++i){
+            offsets[i] = Point.sub(rot_offsets[rotState][i], rot_offsets[(rotState+1) % 4][i]);
+        }
+        return offsets;
     }
 
-    public void add(Point pt){
-        this.x += pt.x;
-        this.y += pt.y;
+    // rotState+3 because of modulo wrapping
+    public void rotateCCW(){
+        // TODO: Add offset checks
+        rotState = rotState + 3 % 4;
+        for (int i = 0; i < tiles.length; ++i){
+            tiles[i] = new Point(tiles[i].y , -tiles[i].x);
+        }
     }
-
-    public void sub(Point pt){
-        this.x -= pt.x;
-        this.y -= pt.y;
+    public Point [] ccwOffsets(){
+        Point [] offsets = new Point [5];
+        for (int i = 0; i < offsets.length; ++i){
+            offsets[i] = Point.sub(rot_offsets[rotState][i], rot_offsets[(rotState+3) % 4][i]);
+        }
+        return offsets;
     }
-
-    static Point Down()  {return new Point (0,-1);}
-    static Point Up()    {return new Point (0,1);}
-    static Point Left()  {return new Point (-1,0);}
-    static Point Right() {return new Point (1,0);}
-    static Point Zero()  {return new Point (0,0);}
 }

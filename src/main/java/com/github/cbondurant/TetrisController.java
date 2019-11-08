@@ -1,22 +1,23 @@
 package com.github.cbondurant;
 import javax.swing.Timer;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TetrisController  implements KeyListener, ActionListener{
+public class TetrisController extends KeyAdapter implements ActionListener{
 
     private TetrisModel model;
+    private TetrisView view;
     private Timer dropTimer;
-    private static int dropDelay = 50; 
+    private static int dropDelay = 500; 
 
-    public TetrisController(TetrisModel model){
+    public TetrisController(TetrisModel model, TetrisView view){
         this.model = model;
+        this.view = view;
         this.dropTimer = new Timer(dropDelay, this);
         this.dropTimer.start();
     }
-
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -30,13 +31,14 @@ public class TetrisController  implements KeyListener, ActionListener{
             model.hold();
             break;
         case KeyEvent.VK_DOWN:
-        
+            model.drop();
             break;
         case KeyEvent.VK_RIGHT:
             model.shiftRight();
             break;
         case KeyEvent.VK_LEFT:
             model.shiftLeft();
+            break;
         case KeyEvent.VK_UP:
         case KeyEvent.VK_X:
             model.rotateCW();
@@ -47,18 +49,13 @@ public class TetrisController  implements KeyListener, ActionListener{
         default:
             break;
         }
-
+    view.updateUI();
     }
 
     @Override
     // Used for timer events
     public void actionPerformed(ActionEvent e) {
         model.drop();
+        view.updateUI();
     }
-    
-    // Required for the interface but not used.
-    @Override
-    public void keyReleased(KeyEvent e) {}
-    @Override
-    public void keyTyped(KeyEvent e) {}
 }
