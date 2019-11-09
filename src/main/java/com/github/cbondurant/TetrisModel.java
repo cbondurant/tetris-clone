@@ -168,6 +168,9 @@ public class TetrisModel{
                 draw();
             }
         }
+        else{
+            this.lockCounter = 0;
+        }
     }
 
     public Color getTile(int x, int y) {
