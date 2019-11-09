@@ -48,6 +48,19 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.github.cbondurant.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
             <!--
                 You can run jacoco in the default profile with:

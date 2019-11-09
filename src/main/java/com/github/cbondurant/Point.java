@@ -6,6 +6,11 @@ final class Point{
         this.x = x;
         this.y = y;
     }
+    
+    Point(Point pt){
+        this.x = pt.x;
+        this.y = pt.y;
+    }
 
     public void add(Point pt){
         this.x += pt.x;

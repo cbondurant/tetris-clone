@@ -1,22 +1,20 @@
 package com.github.cbondurant;
-import javax.swing.Timer;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class TetrisController extends KeyAdapter implements ActionListener{
+import javax.swing.JPanel;
+
+import java.awt.event.KeyAdapter;
+
+public class TetrisController extends KeyAdapter{
 
     private TetrisModel model;
-    private TetrisView view;
-    private Timer dropTimer;
-    private static int dropDelay = 500; 
+    private JPanel [] views;
+    private boolean running;
 
-    public TetrisController(TetrisModel model, TetrisView view){
+    public TetrisController(TetrisModel model, JPanel [] views){
         this.model = model;
-        this.view = view;
-        this.dropTimer = new Timer(dropDelay, this);
-        this.dropTimer.start();
+        this.views = views;
+        this.running = true;
     }
 
     @Override
@@ -29,6 +27,9 @@ public class TetrisController extends KeyAdapter implements ActionListener{
         case KeyEvent.VK_C:
         case KeyEvent.VK_SHIFT:
             model.hold();
+            break;
+        case KeyEvent.VK_R:
+            model.resetGame();
             break;
         case KeyEvent.VK_DOWN:
             model.drop();
@@ -49,13 +50,24 @@ public class TetrisController extends KeyAdapter implements ActionListener{
         default:
             break;
         }
-    view.updateUI();
+        for(JPanel view: this.views){
+            view.updateUI();
+        }
     }
 
-    @Override
-    // Used for timer events
-    public void actionPerformed(ActionEvent e) {
-        model.drop();
-        view.updateUI();
+    public void mainLoop() {
+
+        double prev = System.nanoTime();
+        while (running){
+            if (model.running){
+                double start = System.nanoTime();
+                double deltaTime = start - prev;
+                model.onUpdate(deltaTime / 1E9);
+                for (JPanel view: this.views){
+                    view.updateUI();
+                }
+                prev = start;
+            }
+        }
     }
 }

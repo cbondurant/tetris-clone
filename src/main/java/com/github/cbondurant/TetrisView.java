@@ -20,11 +20,12 @@ public final class TetrisView extends JPanel {
     }
 
     public Dimension getPreferredSize() {
-        return new Dimension(TetrisModel.width * 25, TetrisModel.height * 25);
+        return new Dimension(TetrisModel.width * TetrisView.TileWidth, TetrisModel.height * TetrisView.TileHeight);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         for (int i = 0; i < TetrisModel.width; ++i){
             for (int j = 0; j < TetrisModel.height; ++j){
                 if (model.getTile(i, j) != null){
@@ -42,6 +43,21 @@ public final class TetrisView extends JPanel {
             int y = model.current.position.y + model.current.tiles[i].y;
             g.fillRect(x*TetrisView.TileWidth, y*TetrisView.TileHeight, TetrisView.TileWidth, TetrisView.TileHeight);
         }
+        
+        Point ghostCenter = model.ghostPosition();
+        for (int i = 0; i < model.current.tiles.length; ++i){
+            int x = ghostCenter.x + model.current.tiles[i].x;
+            int y = ghostCenter.y + model.current.tiles[i].y;
+            g.fillRect((x*TetrisView.TileWidth)+5, (y*TetrisView.TileHeight)+5, TetrisView.TileWidth-10, TetrisView.TileHeight-10);
+        }
 
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < TetrisModel.width; ++i){
+            g.drawLine(i * TetrisView.TileWidth, 0, i * TetrisView.TileWidth, TetrisModel.height * TetrisView.TileHeight);
+        }
+        
+        for (int i = 0; i < TetrisModel.height; ++i){
+            g.drawLine(0, i * TetrisView.TileHeight, TetrisModel.width * TetrisView.TileWidth, i * TetrisView.TileHeight);
+        }
     }
 }

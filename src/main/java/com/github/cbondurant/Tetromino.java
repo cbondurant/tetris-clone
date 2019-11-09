@@ -9,58 +9,58 @@ class TetrominoBag{
         new Tetromino( // L
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(1, -1)},
             new Point [][] {
-                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
             }, Color.ORANGE),
         new Tetromino( // J
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(-1, -1)},
             new Point [][]    {
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
             }, Color.BLUE),
         new Tetromino( // S
             new Point []{ new Point(-1, 0), new Point(0, 0), new Point(0, -1), new Point(1, -1)},
             new Point [][]{
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
             }, Color.GREEN),
         new Tetromino( // Z
             new Point []{ new Point(-1, -1), new Point(0, 0), new Point(1, 0), new Point(0, -1)},
             new Point [][]{
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
             }, Color.RED),
         new Tetromino( // O
             new Point []{ new Point(0, -1), new Point(0, 0), new Point(1, 0), new Point(1, -1)},
             new Point [][]{
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, -1), new Point( 0, -1), new Point( 0, -1), new Point( 0, -1), new Point( 0, -1)},
-                { new Point(-1, -1), new Point(-1, -1), new Point(-1, -1), new Point(-1, -1), new Point(-1, -1)},
+                { new Point( 0, 1), new Point( 0, 1), new Point( 0, 1), new Point( 0, 1), new Point( 0, 1)},
+                { new Point(-1, 1), new Point(-1, 1), new Point(-1, 1), new Point(-1, 1), new Point(-1, 1)},
                 { new Point(-1, 0), new Point(-1, 0), new Point(-1, 0), new Point(-1, 0), new Point(-1, 0)} 
         }, Color.YELLOW),
-        new Tetromino(
+        new Tetromino( // I
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(2, 0)},
             new Point [][] {
                 { new Point( 0, 0), new Point(-1, 0), new Point( 2, 0), new Point(-1, 0), new Point( 2, 0)},
-                { new Point(-1, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 1), new Point( 0, -2)},
-                { new Point(-1, 1), new Point( 1, 1), new Point(-2, 1), new Point( 1, 0), new Point(-2, 0)},
-                { new Point( 0, 1), new Point( 0, 1), new Point( 0, 1), new Point( 0, -1), new Point( 0, 2)}
+                { new Point(-1, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, -1), new Point( 0, 2)},
+                { new Point(-1, -1), new Point( 1, -1), new Point(-2, -1), new Point( 1, 0), new Point(-2, 0)},
+                { new Point( 0, -1), new Point( 0, -1), new Point( 0, -1), new Point( 0, 1), new Point( 0, -2)}
         }, Color.CYAN),
-        new Tetromino(
+        new Tetromino( // T
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, -1)},
             new Point [][] {
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point( 1, 0), new Point( 1, -1), new Point( 0, 2), new Point( 1, 2)},
+                { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
-                { new Point( 0, 0), new Point(-1, 0), new Point(-1, -1), new Point( 0, 2), new Point(-1, 2)}
+                { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
        }, Color.MAGENTA)
     };
     //#endregion
@@ -86,7 +86,14 @@ class TetrominoBag{
             shuffle(); // Sets index to 0
         }
 		return this.items[index++];
-	}
+    }
+    
+    public Tetromino peekTile(){
+        if (index == items.length){
+            shuffle();
+        }
+        return this.items[index];
+    }
 }
 
 class Tetromino{
@@ -104,9 +111,15 @@ class Tetromino{
         this.color = color;
     }
 
+    public void zeroRotation(){
+        while (rotState != 0){
+            rotateCW();
+        }
+    }
+
     public void rotateCW(){
         // TODO: Add offset checks
-        rotState = rotState + 1 % 4;
+        rotState = (rotState + 1) % 4;
         for (int i = 0; i < tiles.length; ++i){
             tiles[i] = new Point(-tiles[i].y, tiles[i].x);
         }
@@ -121,8 +134,7 @@ class Tetromino{
 
     // rotState+3 because of modulo wrapping
     public void rotateCCW(){
-        // TODO: Add offset checks
-        rotState = rotState + 3 % 4;
+        rotState = (rotState + 3) % 4;
         for (int i = 0; i < tiles.length; ++i){
             tiles[i] = new Point(tiles[i].y , -tiles[i].x);
         }
