@@ -51,7 +51,8 @@ public class TetrisController extends KeyAdapter{
             break;
         }
         for(JPanel view: this.views){
-            view.updateUI();
+            view.repaint();
+            view.revalidate();
         }
     }
 
@@ -61,11 +62,18 @@ public class TetrisController extends KeyAdapter{
         while (running){
             if (model.running){
                 double start = System.nanoTime();
-                double deltaTime = start - prev;
+                Double deltaTime = start - prev;
                 model.onUpdate(deltaTime / 1E9);
                 for (JPanel view: this.views){
-                    view.updateUI();
+                    view.repaint();
+                    view.revalidate();
                 }
+                while ( System.nanoTime() - prev < 1E9/ 60)
+                {
+                    Thread.yield();
+                    try {Thread.sleep(1);} catch(Exception e) {} 
+                }
+                // System.out.println("Framerate = " + Double.valueOf(1e9/(System.nanoTime() - prev)).toString());
                 prev = start;
             }
         }
