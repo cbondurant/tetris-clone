@@ -66,6 +66,14 @@ public final class TetrisView extends JPanel {
                 
             }
         }
+        
+        // Ghost
+        Point ghostCenter = model.ghostPosition();
+        for (int i = 0; i < model.current.tiles.length; ++i){
+            int x = ghostCenter.x + model.current.tiles[i].x;
+            int y = ghostCenter.y + model.current.tiles[i].y;
+            g.fillRect((x*TetrisView.TileWidth)+5, (y*TetrisView.TileHeight)+5, TetrisView.TileWidth-10, TetrisView.TileHeight-10);
+        }
 
         // Foreground Tiles
         for (int i = 0; i < model.current.tiles.length; ++i){
@@ -80,12 +88,5 @@ public final class TetrisView extends JPanel {
                 Color.WHITE, null);
         }
         
-        // Ghost
-        Point ghostCenter = model.ghostPosition();
-        for (int i = 0; i < model.current.tiles.length; ++i){
-            int x = ghostCenter.x + model.current.tiles[i].x;
-            int y = ghostCenter.y + model.current.tiles[i].y;
-            g.fillRect((x*TetrisView.TileWidth)+5, (y*TetrisView.TileHeight)+5, TetrisView.TileWidth-10, TetrisView.TileHeight-10);
-        }
     }
 }
