@@ -13,7 +13,7 @@ class TetrominoBag{
                 { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
                 { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
-            }, Color.ORANGE),
+            }, 0),
         new Tetromino( // J
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(-1, -1)},
             new Point [][]    {
@@ -21,7 +21,7 @@ class TetrominoBag{
                 { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
                 { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
-            }, Color.BLUE),
+            }, 1),
         new Tetromino( // S
             new Point []{ new Point(-1, 0), new Point(0, 0), new Point(0, -1), new Point(1, -1)},
             new Point [][]{
@@ -29,7 +29,7 @@ class TetrominoBag{
                 { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
                 { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
-            }, Color.GREEN),
+            }, 2),
         new Tetromino( // Z
             new Point []{ new Point(-1, -1), new Point(0, 0), new Point(1, 0), new Point(0, -1)},
             new Point [][]{
@@ -37,7 +37,7 @@ class TetrominoBag{
                 { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
                 { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
-            }, Color.RED),
+            }, 3),
         new Tetromino( // O
             new Point []{ new Point(0, -1), new Point(0, 0), new Point(1, 0), new Point(1, -1)},
             new Point [][]{
@@ -45,7 +45,7 @@ class TetrominoBag{
                 { new Point( 0, 1), new Point( 0, 1), new Point( 0, 1), new Point( 0, 1), new Point( 0, 1)},
                 { new Point(-1, 1), new Point(-1, 1), new Point(-1, 1), new Point(-1, 1), new Point(-1, 1)},
                 { new Point(-1, 0), new Point(-1, 0), new Point(-1, 0), new Point(-1, 0), new Point(-1, 0)} 
-        }, Color.YELLOW),
+        }, 4),
         new Tetromino( // I
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(2, 0)},
             new Point [][] {
@@ -53,7 +53,7 @@ class TetrominoBag{
                 { new Point(-1, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, -1), new Point( 0, 2)},
                 { new Point(-1, -1), new Point( 1, -1), new Point(-2, -1), new Point( 1, 0), new Point(-2, 0)},
                 { new Point( 0, -1), new Point( 0, -1), new Point( 0, -1), new Point( 0, 1), new Point( 0, -2)}
-        }, Color.CYAN),
+        }, 5),
         new Tetromino( // T
             new Point [] { new Point(-1, 0), new Point(0, 0), new Point(1, 0), new Point(0, -1)},
             new Point [][] {
@@ -61,7 +61,7 @@ class TetrominoBag{
                 { new Point( 0, 0), new Point( 1, 0), new Point( 1, 1), new Point( 0, -2), new Point( 1, -2)},
                 { new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0), new Point( 0, 0)},
                 { new Point( 0, 0), new Point(-1, 0), new Point(-1, 1), new Point( 0, -2), new Point(-1, -2)}
-       }, Color.MAGENTA)
+       }, 6)
     };
     //#endregion
     private int index;
@@ -100,15 +100,15 @@ class Tetromino{
     Point [] tiles;
     Point [][] rot_offsets;
     Point position;
-    Color color;
+    int index;
     private int rotState;
 
-    Tetromino(Point [] tiles, Point [][] offsets, Color color){
+    Tetromino(Point [] tiles, Point [][] offsets, int index){
         this.rotState = 0;
         this.tiles = tiles;
         this.rot_offsets = offsets;
         this.position = new Point(5,5);
-        this.color = color;
+        this.index = index;
     }
 
     public void zeroRotation(){

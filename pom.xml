@@ -72,6 +72,11 @@
                 <version>0.8.1</version>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
     </build>
     <reporting>
         <plugins>

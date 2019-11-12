@@ -1,6 +1,5 @@
 package com.github.cbondurant;
 
-import java.awt.Color;
 import java.lang.Math;
 
 public class TetrisModel{
@@ -10,6 +9,9 @@ public class TetrisModel{
     public int level;
     public static int goalMultiplier = 5;
     public int goal;
+
+    public final static int EMPTY_TILE = -1;
+
     private final static int[] clearScores = { 0, 1, 3, 5, 8 };// The array of points awarded for each number of line
                                                                // clears
     public Tetromino current, held;
@@ -24,17 +26,17 @@ public class TetrisModel{
     double dropCounter = 0d; // timing mechanism
     double lockCounter = 0d;
 
-    private Color[][] grid;
+    private int[][] grid;
 
     public int getClearGoal(){
         return this.level * TetrisModel.goalMultiplier;
     }
 
     public TetrisModel() {
-        this.grid = new Color[width][height];
+        this.grid = new int[width][height];
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[i].length; ++j) {
-                grid[i][j] = null;
+                grid[i][j] = TetrisModel.EMPTY_TILE;
             }
         }
         this.bag = new TetrominoBag();
@@ -48,7 +50,7 @@ public class TetrisModel{
         this.running = false;
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[i].length; ++j) {
-                grid[i][j] = Color.GRAY;
+                grid[i][j] = -1;
             }
         }
     }
@@ -56,7 +58,7 @@ public class TetrisModel{
     public void resetGame() {
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[i].length; ++j) {
-                grid[i][j] = null;
+                grid[i][j] = TetrisModel.EMPTY_TILE;
             }
         }
         draw();
@@ -173,7 +175,7 @@ public class TetrisModel{
         }
     }
 
-    public Color getTile(int x, int y) {
+    public int getTile(int x, int y) {
         return grid[x][y];
     }
 
@@ -181,7 +183,7 @@ public class TetrisModel{
         Point pos = current.position;
         this.holdAllowed = true;
         for (int i = 0; i < current.tiles.length; ++i) {
-            grid[pos.x + current.tiles[i].x][pos.y + current.tiles[i].y] = current.color;
+            grid[pos.x + current.tiles[i].x][pos.y + current.tiles[i].y] = current.index;
         }
         clearLines();
     }
@@ -192,16 +194,16 @@ public class TetrisModel{
         for (int i = 0; i < height; ++i) {
             boolean rowClear = true;
             for (int j = 0; j < width; ++j) {
-                if (this.grid[j][i] == null)
+                if (this.grid[j][i] == TetrisModel.EMPTY_TILE)
                     rowClear = false;
             }
             if (rowClear) {
                 ++clearCount;
                 for (int j = 0; j < width; ++j) {
-                    this.grid[j][i] = null;
-                    Color tmp = null;
+                    this.grid[j][i] = TetrisModel.EMPTY_TILE;
+                    int tmp = TetrisModel.EMPTY_TILE;
                     for (int k = 0; k <= i; ++k) {
-                        Color tmp2 = this.grid[j][k];
+                        int tmp2 = this.grid[j][k];
                         this.grid[j][k] = tmp;
                         tmp = tmp2;
                     }
@@ -231,7 +233,7 @@ public class TetrisModel{
         if (pt.x < 0 || pt.y < 0 || width <= pt.x || height <= pt.y){
             return false;
         }
-        if (grid[pt.x][pt.y] != null){
+        if (grid[pt.x][pt.y] != TetrisModel.EMPTY_TILE){
             return false;
         }
         return true;
