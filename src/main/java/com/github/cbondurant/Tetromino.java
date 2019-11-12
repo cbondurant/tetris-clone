@@ -117,7 +117,6 @@ class Tetromino{
     }
 
     public void rotateCW(){
-        // TODO: Add offset checks
         rotState = (rotState + 1) % 4;
         for (int i = 0; i < tiles.length; ++i){
             tiles[i] = new Point(-tiles[i].y, tiles[i].x);
