@@ -1,7 +1,6 @@
 package com.github.cbondurant;
 
 import java.util.concurrent.ThreadLocalRandom;
-import java.awt.Color;
 
 class TetrominoBag{
     // #region Tetromino Definition
