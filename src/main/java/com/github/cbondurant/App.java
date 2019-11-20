@@ -1,5 +1,9 @@
 package com.github.cbondurant;
+
 import javax.swing.JPanel;
+
+import com.github.cbondurant.input.KeyHandler;
+
 import javax.swing.*;
 import java.awt.BorderLayout;
 
@@ -17,10 +21,11 @@ public final class App implements Runnable {
         TetrisModel model = new TetrisModel();
         TetrisView view = new TetrisView(model);
         HUDView hud = new HUDView(model);
-        TetrisController controller = new TetrisController(model, new JPanel []{view, hud});
+        KeyHandler kh = new KeyHandler();
+        TetrisController controller = new TetrisController(model, new JPanel []{view, hud}, kh);
         frame.add(view);
         frame.getContentPane().add(hud, BorderLayout.EAST);
-        frame.addKeyListener(controller);
+        frame.addKeyListener(kh);
         frame.pack();
         frame.setVisible(true);
 
